@@ -2,6 +2,8 @@ import subprocess
 import logging
 import requests
 import sys
+import time
+import redis
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -12,6 +14,7 @@ output_log.setFormatter(logging.Formatter(
 logger.addHandler(output_log)
 
 while True:
+    time.sleep(1)
     try:
         queue_url = 'http://localhost:5002/todos/request'
         response = requests.get(queue_url)

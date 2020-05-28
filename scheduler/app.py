@@ -67,22 +67,10 @@ class ScheduleRun(Resource):
         '''Run a schedule'''
         schedule = scheduledata.get_schedule(schedule_id)
         command = json.dumps({'command': schedule['command']})
-        queue_url = 'http://localhost:5002/todos/'
+        queue_url = 'http://192.168.0.108:5002/todos/'
         requests.post(queue_url, json=command)
 
         return scheduledata.schedules, 201
-
-
-# def check_schedule():
-#     while True:
-#         time_now = datetime.datetime.now().time().replace(second=0, microsecond=0)
-#         for schedule in scheduledata.schedules:
-#             schedule_time = datetime.datetime.strptime(
-#                 schedule['time'], "%H:%M").time()
-#             if time_now == schedule_time:
-#                 queue_url = 'http://localhost:5001/todos'
-#                 data = {'command': schedule['command']}
-#                 request.post(queue_url, data)
 
 
 if __name__ == '__main__':
